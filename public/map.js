@@ -8,8 +8,6 @@ if ('geolocation' in navigator) {
 }
 
 function showPosition(position) {
-    //x.innerHTML = "Latitude: " + position.coords.latitude +
-    //    "<br>Longitude: " + position.coords.longitude;
     var mymap = L.map('mapid').setView([position.coords.latitude, position.coords.longitude], 13);
     var marker = L.marker([position.coords.latitude, position.coords.longitude]).addTo(mymap);
     marker.bindPopup("Your actual position!").openPopup();
