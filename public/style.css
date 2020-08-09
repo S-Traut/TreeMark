@@ -1,12 +1,19 @@
 .Header {
     background-color: #1b1b1b;
-    height: 80px;
+    height: 75px;
+    display: flex;
+    align-items: center;
 }
 
-html,
-body,
+.TitleImage {
+    height: 40px;
+    margin: 10px;
+}
+
 #mapid {
-    height: 100%;
+    position: absolute;
+    top: 75px;
+    bottom: 0;
     width: 100%;
 }
 
