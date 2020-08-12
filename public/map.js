@@ -1,5 +1,6 @@
 var tmap;
 var geolocationActive;
+var playerMarker;
 
 if ('geolocation' in navigator) {
     geolocationActive = true;
@@ -21,20 +22,26 @@ function setup(position) {
         accessToken: 'pk.eyJ1IjoicG9ub3lvc2hpIiwiYSI6ImNrZG0xdHR1azE0Nnkyem1yaXh6NWYycmMifQ.zN5LQ3gdujetU6WDIT3CMQ'
     }).addTo(tmap);
 
-    addMarker(position);
+    playerMarker = addMarker(position);
+    setInterval(function() { moveMarker(playerMarker, position); }, 1000);
 }
 
 function addMarker(position) {
     var marker = L.marker([position.coords.latitude, position.coords.longitude]).addTo(tmap);
     marker.bindPopup("Your actual position!").openPopup();
+    return marker;
 };
+
+function moveMarker(marker, position) {
+    marker.setLatLng([position.coords.latitude, position.coords.longitude]);
+}
+
 
 var button = document.getElementById("ButtonPlus");
 button.onclick = function() {
     if (geolocationActive) {
-        var position = navigator.geolocation.getCurrentPosition(addMarker);
+
     } else {
         console.log("Geolocation not activated!")
     }
-
 };

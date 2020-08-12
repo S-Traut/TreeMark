@@ -1,11 +1,11 @@
 var express = require('express');
 var path = require('path');
-//const Datastore = require('nedb');
+const Datastore = require('nedb');
 
 const app = express();
 const port = 6564
-    //const database = new Datastore('database.db');
-    //database.loadDatabase();
+const database = new Datastore('database.db');
+database.loadDatabase();
 
 app.use(express.static(path.join(__dirname, 'public')));
 
