@@ -1,6 +1,10 @@
+var database = require('./database');
+
 var tmap;
 var geolocationActive;
 var playerMarker;
+var posX;
+var posY;
 
 if ('geolocation' in navigator) {
     geolocationActive = true;
@@ -23,6 +27,8 @@ function setup(position) {
     }).addTo(tmap);
 
     playerMarker = addMarker(position);
+
+    //Update player position marker
     setInterval(function() { moveMarker(playerMarker, position); }, 1000);
 }
 
@@ -34,13 +40,17 @@ function addMarker(position) {
 
 function moveMarker(marker, position) {
     marker.setLatLng([position.coords.latitude, position.coords.longitude]);
+    if (marker = playerMarker) {
+        posX = position.coords.latitude;
+        posY = position.coords.longitude;
+    }
 }
 
 
 var button = document.getElementById("ButtonPlus");
 button.onclick = function() {
     if (geolocationActive) {
-
+        database.recordValue(posX, posY);
     } else {
         console.log("Geolocation not activated!")
     }
